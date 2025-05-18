@@ -64,14 +64,35 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1725956609980593583}
     - targetCorrespondingSourceObject: {fileID: -7139261109480557378, guid: a4f7b66b52108d4448452738f848652f, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 7317100952130857473}
+    - targetCorrespondingSourceObject: {fileID: -7139261109480557378, guid: a4f7b66b52108d4448452738f848652f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 334323100396673533}
+    - targetCorrespondingSourceObject: {fileID: -7139261109480557378, guid: a4f7b66b52108d4448452738f848652f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5759215160328700934}
   m_SourcePrefab: {fileID: 100100000, guid: a4f7b66b52108d4448452738f848652f, type: 3}
 --- !u!1 &4692040901158410307 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7139261109480557378, guid: a4f7b66b52108d4448452738f848652f, type: 3}
   m_PrefabInstance: {fileID: 6769268198542994685}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7317100952130857473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692040901158410307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb0e551cbf3e2a94db642801bbf71f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
+  triggerInterval: 3
+  spikeAnimator: {fileID: 5759215160328700934}
 --- !u!65 &334323100396673533
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -93,6 +114,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.2, y: 2.0000005, z: 2.2000003}
   m_Center: {x: 0, y: 0.99999994, z: 0.0000004172325}
+--- !u!95 &5759215160328700934
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692040901158410307}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c1ac5f35950fa0f4a96e764ec10d68b8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5850224699795952044 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a4f7b66b52108d4448452738f848652f, type: 3}
