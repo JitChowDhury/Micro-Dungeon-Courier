@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     public void CompleteLevel()
     {
-        Debug.Log("Level Complete!");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         // TODO: Add level transition, UI, or restart logic
     }
 }

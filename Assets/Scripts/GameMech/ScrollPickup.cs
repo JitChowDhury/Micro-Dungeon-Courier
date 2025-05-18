@@ -4,7 +4,12 @@ public class ScrollPickup : MonoBehaviour
 {
     //public GameObject pickupEffect;
     private bool pickedUp = false;
+    [SerializeField] private float rotationSpeed = 10f;
 
+    void Update()
+    {
+        transform.Rotate(0, rotationSpeed, 0);
+    }
     void OnTriggerEnter(Collider other)
     {
         if (pickedUp) return;
