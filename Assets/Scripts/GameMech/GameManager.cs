@@ -4,12 +4,22 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
     private bool hasScroll = false;
     private bool hasKey = false;
 
     void Awake()
     {
+        // If an instance already exists and it's not this one, destroy this object
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // Otherwise, make this the instance and persist across scenes
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void ScrollCollected()
@@ -17,6 +27,7 @@ public class GameManager : MonoBehaviour
         hasScroll = true;
         Debug.Log("Scroll collected!");
     }
+
     public void KeyCollected()
     {
         hasKey = true;
@@ -27,6 +38,7 @@ public class GameManager : MonoBehaviour
     {
         return hasScroll;
     }
+
     public bool HasKey()
     {
         return hasKey;
@@ -35,6 +47,5 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        // TODO: Add level transition, UI, or restart logic
     }
 }
