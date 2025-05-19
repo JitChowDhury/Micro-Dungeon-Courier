@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2410800011035583426}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20742306, y: -0.5343373, z: 0.1371945, w: 0.80785954}
-  m_LocalPosition: {x: 8.464245, y: 4.8175364, z: -3.4291854}
+  m_LocalRotation: {x: 0.22814482, y: -0.38549247, z: 0.09897762, w: 0.88856566}
+  m_LocalPosition: {x: 8.361083, y: 4.878536, z: -8.848909}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -199,8 +199,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5699400653838107248}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20742306, y: -0.5343373, z: 0.13719448, w: 0.80785954}
-  m_LocalPosition: {x: 8.464244, y: 4.817537, z: -3.4291866}
+  m_LocalRotation: {x: 0.22814484, y: -0.38549247, z: 0.09897763, w: 0.88856566}
+  m_LocalPosition: {x: 8.361083, y: 4.8785367, z: -8.848909}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -228,7 +228,7 @@ MonoBehaviour:
   Target:
     TrackingTarget: {fileID: 0}
     LookAtTarget: {fileID: 0}
-    CustomLookAtTarget: 0
+    CustomLookAtTarget: 1
   Lens:
     FieldOfView: 50.3
     OrthographicSize: 5
@@ -360,7 +360,7 @@ MonoBehaviour:
   TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
-  MinimumDistanceFromTarget: 0.2
+  MinimumDistanceFromTarget: 2.59
   AvoidObstacles:
     Enabled: 1
     DistanceLimit: 0
