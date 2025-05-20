@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 velocity;
     private bool isGrounded;
+    private Transform currentPlatform;
+    private Vector3 lastPlatformPosition; // Track platform position to calculate movement
 
     void Start()
     {
@@ -30,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; // small downward force to keep grounded
+            velocity.y = -2f; // Small downward force to keep grounded
         }
 
         float moveX = Input.GetAxisRaw("Horizontal");
@@ -47,7 +49,19 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+        // Calculate platform movement if on a platform
+        Vector3 platformDelta = Vector3.zero;
+        if (currentPlatform != null)
+        {
+            Vector3 newPlatformPosition = currentPlatform.position;
+            platformDelta = newPlatformPosition - lastPlatformPosition;
+            lastPlatformPosition = newPlatformPosition;
+        }
+
+        // Combine player movement with platform movement
+        Vector3 totalMovement = (moveDirection * moveSpeed + platformDelta / Time.deltaTime) * Time.deltaTime;
+
+        controller.Move(totalMovement);
 
         // Jumping
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -61,5 +75,26 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("Speed", moveDirection.magnitude);
         animator.SetBool("IsJumping", !isGrounded);
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.CompareTag("MovingPlatform"))
+        {
+            if (currentPlatform != hit.collider.transform)
+            {
+                currentPlatform = hit.collider.transform;
+                lastPlatformPosition = currentPlatform.position; // Initialize platform position
+                transform.SetParent(currentPlatform);
+            }
+        }
+        else
+        {
+            if (currentPlatform != null)
+            {
+                transform.SetParent(null);
+                currentPlatform = null;
+            }
+        }
     }
 }

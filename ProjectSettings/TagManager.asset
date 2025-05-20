@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Stairs
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
