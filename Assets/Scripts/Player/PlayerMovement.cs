@@ -96,5 +96,20 @@ public class PlayerMovement : MonoBehaviour
                 currentPlatform = null;
             }
         }
+
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        // Only push objects with Rigidbody and that aren't kinematic
+        if (body == null || body.isKinematic) return;
+
+        // Optional: only push objects tagged "Pushable"
+        if (!hit.collider.CompareTag("Pushable")) return;
+
+        // Don't push down or up
+        if (hit.moveDirection.y < -0.3f) return;
+
+        // Apply force
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.linearVelocity = pushDir * 3f; // Adjust 3f to tweak strength
     }
 }

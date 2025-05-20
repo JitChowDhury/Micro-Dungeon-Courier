@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Stairs
   - MovingPlatform
+  - PressurePlate
+  - Pushable
   layers:
   - Default
   - TransparentFX
