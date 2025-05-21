@@ -6,6 +6,7 @@ public class TorchManager : MonoBehaviour
 
     public int totalTorches = 3;
     private int torchesLit = 0;
+    private Animator anim;
 
     public GameObject bridgeToActivate;
 
@@ -21,7 +22,8 @@ public class TorchManager : MonoBehaviour
         if (torchesLit >= totalTorches)
         {
             Debug.Log("All torches lit! Activate bridge.");
-            bridgeToActivate.SetActive(true); // or animate it
+            anim = bridgeToActivate.GetComponent<Animator>();
+            anim.SetBool("IsActive", true);
         }
     }
 }
