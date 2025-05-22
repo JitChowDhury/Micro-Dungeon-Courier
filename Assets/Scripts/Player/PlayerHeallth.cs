@@ -6,15 +6,16 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     private int currentHealth;
     private CharacterController controller;
-
+    private Animator animator;
     public Transform respawnPoint;
 
-    private bool isDead = false;
+    public bool isDead = false;
 
     private void Start()
     {
         currentHealth = maxHealth;
         controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(int amount)
@@ -34,24 +35,31 @@ public class PlayerHealth : MonoBehaviour
         if (!isDead)
         {
             isDead = true;
+            if (animator != null)
+            {
+                animator.SetTrigger("Die");
+            }
             StartCoroutine(RespawnSequence());
         }
     }
 
     private IEnumerator RespawnSequence()
     {
-        yield return FadeManager.Instance.FadeOut();
+        yield return new WaitForSeconds(1.5f);//waiting for death to finish
 
-        if (controller != null) controller.enabled = false; 
+        yield return FadeManager.Instance.FadeOut();
+        if (controller != null) controller.enabled = false;
+
 
         transform.position = respawnPoint.position;
 
-        if (controller != null) controller.enabled = true;  
 
         currentHealth = maxHealth;
         isDead = false;
 
         yield return new WaitForSeconds(0.5f);
+        if (controller != null) controller.enabled = true;
+        animator.SetTrigger("Respawn");
         yield return FadeManager.Instance.FadeIn();
     }
 }

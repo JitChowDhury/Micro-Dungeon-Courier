@@ -19,12 +19,14 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded; // Whether the player is on the ground
     private Transform currentPlatform; // The moving platform the player is on, if any
     private Vector3 lastPlatformPosition; // Last position of the platform for movement calculation
+    private PlayerHealth playerHealth;
 
     // Initialize components and lock cursor
     private void Start()
     {
         // Get required components
         controller = GetComponent<CharacterController>();
+        playerHealth = GetComponent<PlayerHealth>();
         animator = GetComponent<Animator>();
 
 
@@ -35,10 +37,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        ApplyGravity();
+        if (playerHealth.isDead) return;
         UpdateGroundedState();
         HandlePlayerInput();
         HandlePlatformMovement();
-        ApplyGravity();
         UpdateAnimations();
     }
 
