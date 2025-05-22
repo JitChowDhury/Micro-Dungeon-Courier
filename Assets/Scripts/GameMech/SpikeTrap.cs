@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpikeTrap : MonoBehaviour
 {
-    public float damage = 20f;
+    public int damage = 20;
     public float triggerInterval = 5f;
     public Animator spikeAnimator; // Assign in Inspector
 
@@ -37,7 +37,7 @@ public class SpikeTrap : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isActive = false; // Reset after spike finishes cycle
+            isActive = false;
         }
     }
 }
