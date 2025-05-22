@@ -13,7 +13,7 @@ public class PressurePlate : MonoBehaviour
 
     private void Start()
     {
-        // Set initial color
+        
         if (plateRenderer != null)
         {
             inactiveColor = plateRenderer.material.color;
