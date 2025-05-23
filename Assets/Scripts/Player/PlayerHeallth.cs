@@ -39,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 animator.SetTrigger("Die");
             }
+            StartCoroutine(GameManager.Instance.PlayerDied());
             StartCoroutine(RespawnSequence());
         }
     }

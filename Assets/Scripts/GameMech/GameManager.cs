@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     private bool hasScroll = false;
     private bool hasKey = false;
+    private int deathCount = 0;
+    [SerializeField] private TextMeshProUGUI deathcount;
 
     void Awake()
     {
@@ -48,4 +52,22 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    public IEnumerator PlayerDied()
+    {
+        deathCount++;
+        deathcount.text = (3 - deathCount).ToString(); // Update the UI with the remaining lives.
+
+        if (deathCount >= 3)
+        {
+            yield return FadeManager.Instance.FadeOut();
+            hasKey = false;
+            hasScroll = false;
+            deathCount = 0;
+            deathcount.text = "3"; // Reset the UI for a new game.
+            SceneManager.LoadScene(0);
+            yield return new WaitForSeconds(0.5f);
+            yield return FadeManager.Instance.FadeIn();
+        }
+    }
+
 }
