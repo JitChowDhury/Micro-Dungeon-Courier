@@ -26,6 +26,15 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     public void ScrollCollected()
     {
         hasScroll = true;
@@ -52,10 +61,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-    public IEnumerator PlayerDied()
+    public IEnumerator PlayerDied(System.Action<bool> onComplete)
     {
         deathCount++;
-        deathcount.text = (3 - deathCount).ToString(); // Update the UI with the remaining lives.
+        UpdateDeathCountText();
 
         if (deathCount >= 3)
         {
@@ -63,11 +72,30 @@ public class GameManager : MonoBehaviour
             hasKey = false;
             hasScroll = false;
             deathCount = 0;
-            deathcount.text = "3"; // Reset the UI for a new game.
+
+
             SceneManager.LoadScene(0);
             yield return new WaitForSeconds(0.5f);
             yield return FadeManager.Instance.FadeIn();
+
+            onComplete?.Invoke(true);
         }
+        else
+        {
+            onComplete?.Invoke(false); 
+        }
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Try to find the new text reference in the new scene
+        deathcount = GameObject.Find("DeathCount")?.GetComponent<TextMeshProUGUI>();
+        UpdateDeathCountText();
+    }
+
+    private void UpdateDeathCountText()
+    {
+        if (deathcount != null)
+            deathcount.text = (3 - deathCount).ToString();
     }
 
 }

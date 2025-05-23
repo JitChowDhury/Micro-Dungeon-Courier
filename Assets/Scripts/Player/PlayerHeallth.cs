@@ -35,12 +35,20 @@ public class PlayerHealth : MonoBehaviour
         if (!isDead)
         {
             isDead = true;
+
             if (animator != null)
             {
                 animator.SetTrigger("Die");
             }
-            StartCoroutine(GameManager.Instance.PlayerDied());
-            StartCoroutine(RespawnSequence());
+
+            StartCoroutine(GameManager.Instance.PlayerDied((bool resetOccurred) =>
+            {
+                if (!resetOccurred)
+                {
+                    StartCoroutine(RespawnSequence());
+                }
+                // else: skip respawn because the game reset
+            }));
         }
     }
 

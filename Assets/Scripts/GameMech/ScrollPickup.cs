@@ -8,7 +8,15 @@ public class ScrollPickup : MonoBehaviour
 
     void Update()
     {
+
         transform.Rotate(0, rotationSpeed, 0);
+    }
+    void OnEnable()
+    {
+        if (GameManager.Instance.HasScroll())
+        {
+            Destroy(gameObject);
+        }
     }
     void OnTriggerEnter(Collider other)
     {
