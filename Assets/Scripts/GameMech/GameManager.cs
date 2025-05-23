@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,7 +11,10 @@ public class GameManager : MonoBehaviour
     private bool hasScroll = false;
     private bool hasKey = false;
     private int deathCount = 0;
+
     [SerializeField] private TextMeshProUGUI deathcount;
+    [SerializeField] private Image Book;
+    [SerializeField] private Image Key;
 
     void Awake()
     {
@@ -38,12 +42,14 @@ public class GameManager : MonoBehaviour
     public void ScrollCollected()
     {
         hasScroll = true;
+        Book.enabled = true;
         Debug.Log("Scroll collected!");
     }
 
     public void KeyCollected()
     {
         hasKey = true;
+        Key.enabled = true;
         Debug.Log("Key Collected");
     }
 
@@ -71,6 +77,9 @@ public class GameManager : MonoBehaviour
             yield return FadeManager.Instance.FadeOut();
             hasKey = false;
             hasScroll = false;
+            Book.enabled = false;
+            Key.enabled = false;
+
             deathCount = 0;
 
 
@@ -82,20 +91,27 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            onComplete?.Invoke(false); 
+            onComplete?.Invoke(false);
         }
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Try to find the new text reference in the new scene
         deathcount = GameObject.Find("DeathCount")?.GetComponent<TextMeshProUGUI>();
+        Book = GameObject.Find("BookImage")?.GetComponent<Image>();
+        Key = GameObject.Find("KeyImage")?.GetComponent<Image>();
         UpdateDeathCountText();
+        if (hasScroll && Book != null) Book.enabled = true;
+        if (hasKey && Key != null) Key.enabled = true;
     }
 
     private void UpdateDeathCountText()
     {
         if (deathcount != null)
             deathcount.text = (3 - deathCount).ToString();
+
     }
+
+
 
 }

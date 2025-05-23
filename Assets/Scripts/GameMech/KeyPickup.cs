@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class KeyPickup : MonoBehaviour
 {
-    //public GameObject pickupEffect;
+    public ParticleSystem pickupEffect;
     private bool pickedUp = false;
     [SerializeField] private float rotationSpeed = 10f;
 
@@ -18,12 +18,14 @@ public class KeyPickup : MonoBehaviour
             pickedUp = true;
 
             // Optional: Play effect
-            //if (pickupEffect) Instantiate(pickupEffect, transform.position, Quaternion.identity);
+            ParticleSystem effect = Instantiate(pickupEffect, transform.position, Quaternion.identity);
+            effect.Play();
+            Destroy(effect.gameObject, effect.main.duration);
 
             // Notify GameManager
             GameManager.Instance.KeyCollected();
 
-            
+
             Destroy(gameObject);
         }
     }

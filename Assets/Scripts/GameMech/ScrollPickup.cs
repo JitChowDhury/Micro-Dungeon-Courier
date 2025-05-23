@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ScrollPickup : MonoBehaviour
 {
-    //public GameObject pickupEffect;
+    public ParticleSystem pickupEffect;
     private bool pickedUp = false;
     [SerializeField] private float rotationSpeed = 10f;
 
@@ -26,7 +26,9 @@ public class ScrollPickup : MonoBehaviour
             pickedUp = true;
 
             // Optional: Play effect
-            //if (pickupEffect) Instantiate(pickupEffect, transform.position, Quaternion.identity);
+            ParticleSystem effect = Instantiate(pickupEffect, transform.position, Quaternion.identity);
+            effect.Play();
+            Destroy(effect.gameObject, effect.main.duration);
 
             // Notify GameManager
             GameManager.Instance.ScrollCollected();
