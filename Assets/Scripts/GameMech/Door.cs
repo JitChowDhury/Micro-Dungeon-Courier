@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -5,6 +6,7 @@ public class Door : MonoBehaviour
     private Animator animator;
     private bool isPlayerNear = false;
     private bool hasOpened = false;
+    [SerializeField] private GameObject popUpScreen;
     void Start()
     {
         animator = GetComponentInParent<Animator>();
@@ -22,9 +24,11 @@ public class Door : MonoBehaviour
             }
             else
             {
-                Debug.Log("You need the key first!");
+                popUpScreen.GetComponentInChildren<TextMeshProUGUI>().text = "Find the key to open door";
+                popUpScreen.SetActive(true);
             }
         }
+
     }
     void OnTriggerEnter(Collider other)
     {
@@ -36,9 +40,11 @@ public class Door : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        popUpScreen.SetActive(false);
         if (other.CompareTag("Player"))
         {
             isPlayerNear = false;
         }
+
     }
 }
