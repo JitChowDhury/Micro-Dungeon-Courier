@@ -7,6 +7,7 @@ public class Door : MonoBehaviour
     private bool isPlayerNear = false;
     private bool hasOpened = false;
     [SerializeField] private GameObject popUpScreen;
+    [SerializeField] private AudioSource doorOpen;
     void Start()
     {
         animator = GetComponentInParent<Animator>();
@@ -21,6 +22,7 @@ public class Door : MonoBehaviour
             if (GameManager.Instance.HasKey())
             {
                 animator.SetTrigger("Open");
+                doorOpen.Play();
             }
             else
             {

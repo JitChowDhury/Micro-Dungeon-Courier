@@ -4,19 +4,25 @@ public class SpikeTrap : MonoBehaviour
 {
     public int damage = 20;
     public float triggerInterval = 5f;
-    public Animator spikeAnimator; // Assign in Inspector
+    public Animator spikeAnimator;
+    private AudioSource audioSource;
 
     private bool isActive = false;
 
     private void Start()
     {
         InvokeRepeating(nameof(TriggerSpike), 0f, triggerInterval);
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void TriggerSpike()
     {
         isActive = true;
-        spikeAnimator.SetTrigger("Activate"); // You need an "Activate" trigger in Animator
+        spikeAnimator.SetTrigger("Activate");
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
     }
 
     private void OnTriggerEnter(Collider other)

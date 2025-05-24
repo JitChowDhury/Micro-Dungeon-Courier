@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float rotationSpeed = 720f; // Rotation speed 
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private AudioSource jump;
     // Component references
     private CharacterController controller;
     private Animator animator;
@@ -133,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Calculate initial jump velocity to reach desired height
         verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        jump.Play();
     }
 
     // Apply gravity to vertical velocity and move the player

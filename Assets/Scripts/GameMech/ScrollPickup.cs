@@ -5,6 +5,7 @@ public class ScrollPickup : MonoBehaviour
     public ParticleSystem pickupEffect;
     private bool pickedUp = false;
     [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private AudioSource bookPickup;
 
     void Update()
     {
@@ -26,6 +27,8 @@ public class ScrollPickup : MonoBehaviour
             pickedUp = true;
 
             // Optional: Play effect
+            bookPickup.Play();
+            this.GetComponent<MeshRenderer>().enabled = false;
             ParticleSystem effect = Instantiate(pickupEffect, transform.position, Quaternion.identity);
             effect.Play();
             Destroy(effect.gameObject, effect.main.duration);
@@ -34,7 +37,7 @@ public class ScrollPickup : MonoBehaviour
             GameManager.Instance.ScrollCollected();
 
             // Destroy the scroll
-            Destroy(gameObject);
+            Destroy(gameObject, bookPickup.clip.length);
         }
     }
 }

@@ -5,6 +5,7 @@ public class KeyPickup : MonoBehaviour
     public ParticleSystem pickupEffect;
     private bool pickedUp = false;
     [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private AudioSource keyPickup;
 
 
     void Update()
@@ -18,7 +19,8 @@ public class KeyPickup : MonoBehaviour
         {
             pickedUp = true;
 
-            // Optional: Play effect
+            keyPickup.Play();
+            this.GetComponent<MeshRenderer>().enabled = false;
             ParticleSystem effect = Instantiate(pickupEffect, transform.position, Quaternion.identity);
             effect.Play();
             Destroy(effect.gameObject, effect.main.duration);
@@ -27,7 +29,7 @@ public class KeyPickup : MonoBehaviour
             GameManager.Instance.KeyCollected();
 
 
-            Destroy(gameObject);
+            Destroy(gameObject, keyPickup.clip.length);
         }
     }
 }
