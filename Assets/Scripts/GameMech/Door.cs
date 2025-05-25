@@ -8,6 +8,7 @@ public class Door : MonoBehaviour
     private bool hasOpened = false;
     [SerializeField] private GameObject popUpScreen;
     [SerializeField] private AudioSource doorOpen;
+    [SerializeField] private AudioSource alert;
     void Start()
     {
         animator = GetComponentInParent<Animator>();
@@ -26,8 +27,10 @@ public class Door : MonoBehaviour
             }
             else
             {
+                alert.Play();
                 popUpScreen.GetComponentInChildren<TextMeshProUGUI>().text = "Find the key to open door";
                 popUpScreen.SetActive(true);
+
             }
         }
 

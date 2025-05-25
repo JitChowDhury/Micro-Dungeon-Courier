@@ -4,6 +4,7 @@ using UnityEngine;
 public class PortalExit : MonoBehaviour
 {
     [SerializeField] private GameObject popUpScreen;
+    [SerializeField] private AudioSource alert;
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -14,6 +15,7 @@ public class PortalExit : MonoBehaviour
             }
             else
             {
+                alert.Play();
                 popUpScreen.GetComponentInChildren<TextMeshProUGUI>().text = "Take the book to exit";
                 popUpScreen.SetActive(true);
             }
