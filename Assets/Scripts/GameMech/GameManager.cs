@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     private bool hasScroll = false;
     private bool hasKey = false;
     private int deathCount = 0;
-
+    private HashSet<string> collectedCoins = new HashSet<string>();
     [SerializeField] private TextMeshProUGUI deathcount;
     [SerializeField] private Image Book;
     [SerializeField] private Image Key;
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
 
             deathCount = 0;
 
-
+            collectedCoins.Clear();
             SceneManager.LoadScene(0);
             yield return new WaitForSeconds(0.5f);
             yield return FadeManager.Instance.FadeIn();
@@ -94,6 +95,15 @@ public class GameManager : MonoBehaviour
         {
             onComplete?.Invoke(false);
         }
+    }
+    public void CollectCoin(string id)
+    {
+        collectedCoins.Add(id);
+    }
+
+    public bool IsCoinCollected(string id)
+    {
+        return collectedCoins.Contains(id);
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
