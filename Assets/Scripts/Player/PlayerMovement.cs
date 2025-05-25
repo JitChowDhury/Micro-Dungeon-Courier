@@ -190,6 +190,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Apply push force in the movement direction (XZ plane)
         Vector3 pushDirection = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-        body.linearVelocity = pushDirection * 3f; // Push strength
+        body.linearVelocity = pushDirection * 5f; // Push strength
     }
 }
