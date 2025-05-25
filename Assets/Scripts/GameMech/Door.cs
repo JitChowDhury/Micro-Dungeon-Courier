@@ -27,9 +27,14 @@ public class Door : MonoBehaviour
             }
             else
             {
-                alert.Play();
-                popUpScreen.GetComponentInChildren<TextMeshProUGUI>().text = "Find the key to open door";
-                popUpScreen.SetActive(true);
+                if (alert != null)
+                    alert.Play();
+                if (popUpScreen != null)
+                {
+
+                    popUpScreen.GetComponentInChildren<TextMeshProUGUI>().text = "Find the key to open door";
+                    popUpScreen.SetActive(true);
+                }
 
             }
         }

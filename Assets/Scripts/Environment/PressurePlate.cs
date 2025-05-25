@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
 {
+    [SerializeField] private AudioSource activePlate;
     private int objectsOnPlate = 0;
+
 
     public bool IsActive => objectsOnPlate > 0;
 
@@ -28,6 +30,7 @@ public class PressurePlate : MonoBehaviour
         if (IsActive && plateRenderer != null)
         {
             plateRenderer.material.color = activeColor;
+            activePlate.Play();
         }
     }
 

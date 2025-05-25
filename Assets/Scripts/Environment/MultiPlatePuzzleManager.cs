@@ -4,17 +4,22 @@ public class MultiPlatePuzzleManager : MonoBehaviour
 {
     public PressurePlate[] plates;
     public TriggerableObject target;
-
+    private bool wasActive = false;
     void Update()
     {
-        if (AllPlatesActive())
+        bool currentlyActive = AllPlatesActive();
+
+        if (currentlyActive && !wasActive)
         {
-            target.Activate();
+            target.Activate(); // 🔊 play door sound here
         }
-        else
+        else if (!currentlyActive && wasActive)
         {
             target.Deactivate();
         }
+
+        wasActive = currentlyActive;
+
     }
 
     bool AllPlatesActive()
