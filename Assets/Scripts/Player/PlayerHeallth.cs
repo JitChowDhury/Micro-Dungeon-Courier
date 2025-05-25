@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     private CharacterController controller;
     private Animator animator;
     public Transform respawnPoint;
+    [SerializeField] private ParticleSystem deathEffect;
+    [SerializeField] private AudioSource deathSound;
 
     public bool isDead = false;
 
@@ -40,6 +42,10 @@ public class PlayerHealth : MonoBehaviour
             {
                 animator.SetTrigger("Die");
             }
+            deathSound.Play();
+            ParticleSystem effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            effect.Play();
+            Destroy(effect.gameObject, effect.main.duration + effect.main.startLifetime.constant);
 
             StartCoroutine(GameManager.Instance.PlayerDied((bool resetOccurred) =>
             {
