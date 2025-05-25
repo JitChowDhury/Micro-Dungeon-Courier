@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
             hasScroll = false;
             Book.enabled = false;
             Key.enabled = false;
+            ScoreManager.Instance.ResetScore();
 
             deathCount = 0;
 
