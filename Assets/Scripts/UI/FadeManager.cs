@@ -39,3 +39,4 @@ public class FadeManager : MonoBehaviour
         fadeCanvasGroup.alpha = 0;
     }
 }
+ 

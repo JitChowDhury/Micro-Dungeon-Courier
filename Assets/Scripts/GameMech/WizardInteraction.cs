@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class WizardInteraction : MonoBehaviour
 {
@@ -68,6 +69,14 @@ public class WizardInteraction : MonoBehaviour
             player.GetComponent<PlayerMovement>().enabled = true;
 
         GameManager.Instance?.MarkBookDelivered();
+        yield return new WaitForSeconds(1.5f);
+        if (FadeManager.Instance != null)
+            yield return FadeManager.Instance.FadeOut();
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene("ScoreScene");
+
     }
 
     void OnTriggerEnter(Collider other)

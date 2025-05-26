@@ -20,14 +20,14 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // If an instance already exists and it's not this one, destroy this object
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        // Otherwise, make this the instance and persist across scenes
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
             deathCount = 0;
 
             collectedCoins.Clear();
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
             yield return new WaitForSeconds(0.5f);
             yield return FadeManager.Instance.FadeIn();
 

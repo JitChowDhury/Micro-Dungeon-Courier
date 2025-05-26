@@ -53,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
                 {
                     StartCoroutine(RespawnSequence());
                 }
-                // else: skip respawn because the game reset
+                
             }));
         }
     }
