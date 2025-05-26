@@ -13,9 +13,10 @@ public class GameManager : MonoBehaviour
     private bool hasKey = false;
     private int deathCount = 0;
     private HashSet<string> collectedCoins = new HashSet<string>();
+    private bool bookDelivered = false;
     [SerializeField] private TextMeshProUGUI deathcount;
-    [SerializeField] private Image Book;
-    [SerializeField] private Image Key;
+    [SerializeField] public Image Book;
+    [SerializeField] public Image Key;
 
     void Awake()
     {
@@ -121,6 +122,11 @@ public class GameManager : MonoBehaviour
         if (deathcount != null)
             deathcount.text = (3 - deathCount).ToString();
 
+    }
+    public void MarkBookDelivered()
+    {
+        bookDelivered = true;
+        hasScroll = false;
     }
 
 
