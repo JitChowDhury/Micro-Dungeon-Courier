@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 using System.Collections;
 
 public class FadeManager : MonoBehaviour
